@@ -55,7 +55,7 @@ function DockItem({
       onBlur={() => isHovered.set(0)}
       onClick={onClick}
 
-      className={`relative inline-flex items-center justify-center rounded-full transition-colors duration-300 cursor-pointer text-neutral-500 hover:text-black hover:bg-neutral-200/60 ${className}`}
+      className={`relative inline-flex items-center justify-center rounded-full transition-colors duration-300 cursor-pointer text-black hover:text-black hover:bg-neutral-200/50 ${className}`}
       tabIndex={0}
       role="button"
     >
@@ -87,7 +87,7 @@ function DockLabel({ children, className = '', isHovered }: any) {
           animate={{ opacity: 1, y: -12, x: "-50%" }}
           exit={{ opacity: 0, y: 5, x: "-50%" }}
           transition={{ duration: 0.2 }}
-          className={`${className} absolute -top-10 left-1/2 w-fit whitespace-pre rounded-md border border-neutral-200 bg-white/90 px-2 py-0.5 text-[10px] font-medium text-neutral-800 shadow-sm backdrop-blur-sm z-50 pointer-events-none`}
+          className={`${className} absolute -top-6 left-1/2 w-fit whitespace-pre rounded-md border border-neutral-200 bg-black/90 px-2 py-0.5 text-[10px] font-reguler text-white shadow-sm backdrop-blur-sm z-50 pointer-events-none`}
         >
           {children}
         </motion.div>
@@ -134,7 +134,7 @@ export default function Dock({
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
-        className={`${className} absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center w-fit gap-1 rounded-full bg-white/70 border border-white/20 px-3 pb-2 pt-2 backdrop-blur-2xl shadow-xl z-50 transition-all duration-300`}
+        className={`${className} absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center w-fit gap-1 rounded-full bg-white/70 border border-black/20 px-3 pb-2 pt-2 backdrop-blur-2xl shadow z-20 transition-all duration-300`}
         style={{ height: panelHeight }}
         role="toolbar"
       >

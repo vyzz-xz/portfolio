@@ -4,6 +4,8 @@ import Image from "next/image";
 import ScrollVelocity from "./components/ScrollVelocity"
 import Dock from './components/Dock';
 import TextPressure from "./components/TextPressure";
+import Clock from "./components/Clock";
+import ScrollButton from "./components/ScrollButton";
 import { 
   VscHome, 
   VscAccount, 
@@ -45,6 +47,16 @@ export default function Home() {
   return (
     <main className="min-h-screen w-full bg-white overflow-x-hidden flex flex-col justify-center">
 
+    <div className="fixed inset-0 z-0 pointer-events-none">
+        {(
+          <div className="absolute inset-0 bg-white bg-[radial-gradient(100%_100%_at_50%_0%,rgba(128,0,0,0)_0,rgba(128,0,0,0.15)_50%,rgba(128,0,0,0)_100%)]" />
+        )}
+      </div>
+
+      <div className="absolute top-6 left-6 z-50">
+        <Clock />
+      </div>
+
       <div className="w-full flex flex-col justify-center items-center z-0 px-4">
 
         <div className="w-full max-w-[260px] h-12 relative flex items-center justify-center mb-32 cursor-default z-20">
@@ -79,6 +91,10 @@ export default function Home() {
         />
       </div>
 
+      <div className="flex justify-center mt-12 z-50 pointer-events-auto">
+           <ScrollButton />
+        </div>
+        
       <Dock items={items} />
 
     </main>
