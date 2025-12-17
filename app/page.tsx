@@ -6,6 +6,8 @@ import Dock from './components/Dock';
 import TextPressure from "./components/TextPressure";
 import Clock from "./components/Clock";
 import ScrollButton from "./components/ScrollButton";
+import ScrollReveal from "./components/ScrollReveal";
+
 import { 
   VscHome, 
   VscAccount, 
@@ -45,56 +47,75 @@ export default function Home() {
 
   ];
   return (
-    <main className="min-h-screen w-full bg-white overflow-x-hidden flex flex-col justify-center">
+    <main className="min-h-screen w-full relative bg-white flex flex-col justify-center">
 
     <div className="fixed inset-0 z-0 pointer-events-none">
-        {(
-          <div className="absolute inset-0 bg-white bg-[radial-gradient(100%_100%_at_50%_0%,rgba(128,0,0,0)_0,rgba(128,0,0,0.15)_50%,rgba(128,0,0,0)_100%)]" />
-        )}
+      {(<div className="absolute inset-0 bg-white bg-[radial-gradient(100%_100%_at_50%_0%,rgba(128,0,0,0)_0,rgba(128,0,0,0.15)_50%,rgba(128,0,0,0)_100%)]" />)}
+    </div>
+
+    <div className="fixed top-6 left-6 z-50">
+      <Clock />
+    </div>
+
+    <section id="hero" className="relative w-full h-screen flex flex-col justify-center items-center z-10 overflow-hidden">
+    <div className="w-full flex flex-col justify-center items-center z-0 px-4">
+
+    <div className="absolute top-[23%] left-0 right-0 flex justify-center z-20 px-4">
+    <div className="w-full max-w-[300px] h-12 relative flex items-center justify-center cursor-default">
+      <TextPressure
+        text="MUHAMAD HAFIZ"
+        flex={true}
+        alpha={false}
+        stroke={false}
+        width={true}
+        weight={true}
+        italic={true}
+        textColor={"#000000"}
+        minFontSize={10}
+        />
       </div>
-
-      <div className="absolute top-6 left-6 z-50">
-        <Clock />
-      </div>
-
-      <div className="w-full flex flex-col justify-center items-center z-0 px-4">
-
-        <div className="w-full max-w-[260px] h-12 relative flex items-center justify-center mb-32 cursor-default z-20">
-          <TextPressure
-            text="MUHAMAD HAFIZ"
-            flex={true}
-            alpha={false}
-            stroke={false}
-            width={true}
-            weight={true}
-            italic={true}
-            textColor={"#000000"}
-            minFontSize={10}
-          />
-        </div>
-       </div>
+    </div>
+  </div>
       
-      <div className="w-full z-10 mb-3 -mt-20">
-        <ScrollVelocity
-          texts={['UI/UX DESIGNER - TECH ENTHUSIAST - FRONTEND DEVELOPER -']} 
-          velocity={150}
-          numCopies={50} 
-          className="font-redhat text-[5rem] md:text-[8rem] font-black tracking-[-0.08em] leading-[0.8] text-black whitespace-nowrap"
-        />
-      </div>
-      <div className="w-full -mt-0 md:-mt-0">
-        <ScrollVelocity
-          texts={['TECH ENTHUSIAST - FRONTEND DEVELOPER - UI/UX DESIGNER -']} 
-          velocity={-150}
-          numCopies={50} 
-          className="font-redhat text-[5rem] md:text-[8rem] font-black tracking-[-0.08em] leading-[0.8] text-black whitespace-nowrap"
-        />
-      </div>
+    <div className="w-full relative z-10 transform scale-110 md:scale-100 -mt-12">
+      <ScrollVelocity
+        texts={['UI/UX DESIGNER - TECH ENTHUSIAST - FRONTEND DEVELOPER -']} 
+        velocity={150}
+        numCopies={100} 
+        className="font-redhat text-[5rem] md:text-[8rem] font-black tracking-[-0.08em] leading-[0.8] text-black whitespace-nowrap"
+      />
+    </div>
+    <div className="w-full -mt-0 md:-mt-0">
+      <ScrollVelocity
+        texts={['TECH ENTHUSIAST - FRONTEND DEVELOPER - UI/UX DESIGNER -']} 
+        velocity={-150}
+        numCopies={100} 
+        className="font-redhat text-[5rem] md:text-[8rem] font-black tracking-[-0.08em] leading-[0.8] text-black whitespace-nowrap"
+      />
+    </div>
 
-      <div className="flex justify-center mt-12 z-50 pointer-events-auto">
-           <ScrollButton />
-        </div>
+      <div className="absolute bottom-[20%] left-0 right-0 flex justify-center z-20 pointer-events-auto">
+        <ScrollButton />
+      </div>
+  </section>
+  
+  {/* === SECTION 2: SINGLE STATEMENT (BOLD & CENTER) === */}
+      <section id="about" className="relative w-full min-h-[80vh] flex flex-col items-center justify-center py-20 px-6 md:px-20 z-10">
         
+        <div className="max-w-5xl w-full text-center">
+          
+          <ScrollReveal>
+            <h2 className="md:text-5xl font-medium font-redhat text-black leading-tight tracking-tight">
+              Hi, I'm Muhamad Hafiz. An Computer Science Student and Tech Enthusiast. Mainly focused on UI Design,
+              I love creating intuitive and visually appealing stuff like this.
+            </h2>
+          </ScrollReveal>
+
+        </div>
+
+        <div className="h-40"></div>
+      </section>
+
       <Dock items={items} />
 
     </main>

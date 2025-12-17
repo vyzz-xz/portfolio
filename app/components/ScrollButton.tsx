@@ -6,11 +6,17 @@ import { LuArrowDown } from 'react-icons/lu';
 export default function ScrollButton() {
   
   const handleScroll = () => {
+    const nextSection = document.getElementById('about');
+    if (nextSection) {
+      // Scroll halus ke section tersebut
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
     window.scrollTo({
       top: window.innerHeight,
       behavior: 'smooth'
     });
-  };
+  }
+};
   
 
   return (

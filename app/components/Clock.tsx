@@ -65,7 +65,7 @@ export default function Clock() {
         px-6 py-4
       "
     >
-      <span className="text-xs md:text-sm font-reguler tracking-wider uppercase font-redhat transition-colors duration-300 hover:text-black">
+      <span className="text-xs md:text-base font-light tracking-wider uppercase font-redhat transition-colors duration-300 hover:text-black">
         {time}
       </span>
     </motion.div>
