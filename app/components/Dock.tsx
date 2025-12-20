@@ -134,7 +134,7 @@ export default function Dock({
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
-        className={`${className} fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center w-fit gap-1 rounded-full bg-white/70 border border-black/20 px-3 pb-2 pt-2 backdrop-blur-2xl shadow z-20 transition-all duration-300`}
+        className={`${className} fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center w-fit gap-1 rounded-full bg-white/90 border border-black/10 px-3 pb-2 pt-2 backdrop-blur-2xl shadow z-20 transition-all duration-300`}
         style={{ height: panelHeight }}
         role="toolbar"
       >

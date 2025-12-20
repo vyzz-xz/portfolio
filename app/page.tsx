@@ -7,6 +7,8 @@ import TextPressure from "./components/TextPressure";
 import Clock from "./components/Clock";
 import ScrollButton from "./components/ScrollButton";
 import ScrollReveal from "./components/ScrollReveal";
+import LogoLoop from './components/LogoLoop';
+import CTAButton from "./components/CTAButton";
 
 import { 
   VscHome, 
@@ -17,34 +19,39 @@ import {
 
 import { FaLinkedinIn } from "react-icons/fa6";
 
-export default function Home() {
-  const items = [
-    { 
-      icon: <VscHome size={17} />, 
-      label: 'Home', 
-      onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) 
-    },
-    { 
-      icon: <VscAccount size={17} />, 
-      label: 'About', 
-      onClick: () => alert('About Me') 
-    },
-    { 
-      icon: <VscFolderLibrary size={17} />, 
-      label: 'Projects', 
-      onClick: () => alert('My Projects') 
-    },
-    { 
-      icon: <VscGithubAlt size={17} />, 
-      label: 'GitHub', 
-      onClick: () => window.open('https://github.com/vyzz-xz', '_blank') 
-    },
-    { 
-      icon: <FaLinkedinIn size={17} />, 
-      label: 'LinkedIn', 
-      onClick: () => window.open('https://www.linkedin.com/in/muhamad-hafiz-37467b346', '_blank') 
-    },
+import { 
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, 
+  SiFigma, SiNodedotjs, SiCanva, SiGithub 
+} from 'react-icons/si';
 
+export default function Home() {
+  const techLogos = [
+    { node: <SiReact size={70} />, title: "React", href: "https://react.dev" },
+    { node: <SiNextdotjs size={70} />, title: "Next.js", href: "https://nextjs.org" },
+    { node: <SiTypescript size={70} />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+    { node: <SiTailwindcss size={70} />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+    { node: <SiCanva size={70} />, title: "Canva", href: "https://www.canva.com" },
+    { node: <SiFigma size={70} />, title: "Figma", href: "https://figma.com" },
+    { node: <SiNodedotjs size={70} />, title: "Node.js", href: "https://nodejs.org" },
+    { node: <SiGithub size={70} />, title: "GitHub", href: "https://github.com" },
+  ];
+
+  const items = [
+    {icon: <VscHome size={17} />, 
+      label: 'Home', 
+      onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' })},
+    {icon: <VscAccount size={17} />, 
+      label: 'About', 
+      onClick: () => alert('About Me')},
+    {icon: <VscFolderLibrary size={17} />, 
+      label: 'Projects', 
+      onClick: () => alert('My Projects')},
+    {icon: <VscGithubAlt size={17} />, 
+      label: 'GitHub', 
+      onClick: () => window.open('https://github.com/vyzz-xz', '_blank')},
+    {icon: <FaLinkedinIn size={17} />, 
+      label: 'LinkedIn', 
+      onClick: () => window.open('https://www.linkedin.com/in/muhamad-hafiz-37467b346', '_blank')},
   ];
 
   return (
@@ -56,7 +63,7 @@ export default function Home() {
     <section id="hero" className="relative w-full h-screen flex flex-col justify-center items-center z-10 overflow-hidden">
 
     <div className="absolute inset-0 z-0 pointer-events-none">
-      {(<div className="absolute inset-0 bg-white bg-[radial-gradient(100%_100%_at_50%_0%,rgba(128,0,0,0)_0,rgba(128,0,0,0.15)_50%,rgba(128,0,0,0)_100%)]" />)}
+      {(<div className="absolute inset-0 bg-white bg-[radial-gradient(100%_100%_at_50%_0%,rgba(99,102,241,0)_0,rgba(99,102,241,0.25)_50%,rgba(99,102,241,0)_100%)]" />)}
     </div>
 
     <div className="w-full flex flex-col justify-center items-center z-0 px-4">
@@ -101,7 +108,7 @@ export default function Home() {
   </section>
   
   {/*SECTION ABOUT*/}
-      <section id="about" className="relative w-full min-h-[80vh] flex flex-col items-center justify-center py-20 px-6 md:px-20 z-10">
+      <section id="about" className="relative w-full min-h-[90vh] flex flex-col items-center justify-center py-20 px-6 md:px-20 z-10">
         <div className="max-w-5xl w-full text-center">
           
           <ScrollReveal
@@ -116,7 +123,34 @@ export default function Home() {
           </ScrollReveal>
         </div>
 
-      <div className="h-40"></div>
+      <div className="h-10"></div>
+      </section>
+
+    {/* SECTION TECH STACK */}
+    <section id="skills" className="relative w-full py-10 z-10 flex flex-col items-center justify-center">
+        <div style={{ width: '100%', height: '250px', position: 'relative', overflow: 'hidden'}}>
+          <LogoLoop
+            logos={techLogos}
+            speed={150}
+            direction="left"
+            logoHeight={80}
+            gap={70}
+            hoverSpeed={50} 
+            scaleOnHover={true} 
+            fadeOut={true} 
+            fadeOutColor="#ffffff" 
+            ariaLabel="Technology partners"
+          />
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <CTAButton 
+            text="More About Me" 
+            onClick={() => window.location.href = 'mailto:email@example.com'} 
+          />
+        </div>
+
+        <div className="h-40"></div>
       </section>
 
       <Dock items={items} />
