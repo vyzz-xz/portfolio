@@ -87,7 +87,7 @@ function DockLabel({ children, className = '', isHovered }: any) {
           animate={{ opacity: 1, y: -12, x: "-50%" }}
           exit={{ opacity: 0, y: 5, x: "-50%" }}
           transition={{ duration: 0.2 }}
-          className={`${className} absolute -top-6 left-1/2 w-fit whitespace-pre rounded-md border border-neutral-200 bg-black/90 px-2 py-0.5 text-[10px] font-reguler text-white shadow-sm backdrop-blur-sm z-50 pointer-events-none`}
+          className={`${className} hidden md:block absolute -top-6 left-1/2 w-fit whitespace-pre rounded-md border border-neutral-200 bg-black/90 px-2 py-0.5 text-[10px] font-reguler text-white shadow-sm backdrop-blur-sm z-50 pointer-events-none`}
         >
           {children}
         </motion.div>
@@ -134,7 +134,7 @@ export default function Dock({
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
-        className={`${className} fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center w-fit gap-1 rounded-full bg-white/90 border border-black/10 px-3 pb-2 pt-2 backdrop-blur-2xl shadow z-20 transition-all duration-300`}
+        className={`${className} fixed bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex items-center w-fit gap-0.1 rounded-full bg-white/90 border border-black/10 px-3 pb-2 pt-2 backdrop-blur-2xl shadow z-20 transition-all duration-300`}
         style={{ height: panelHeight }}
         role="toolbar"
       >
