@@ -23,17 +23,12 @@ export default function ThemeToggle({ isDarkMode, toggleTheme }: ThemeToggleProp
       `}
       aria-label="Toggle Theme"
     >
-      {/* AnimatePresence memungkinkan animasi pada komponen yang di-unmount (hilang) */}
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={isDarkMode ? 'dark' : 'light'}
-          // Animasi Masuk: Dari atas, transparan, miring -90 derajat
           initial={{ y: -20, opacity: 0, rotate: -90 }}
-          // Animasi Diam: Di tengah, terlihat jelas, tegak lurus
           animate={{ y: 0, opacity: 1, rotate: 0 }}
-          // Animasi Keluar: Ke bawah, menghilang, miring 90 derajat
           exit={{ y: 20, opacity: 0, rotate: 90 }}
-          // Durasi animasi icon
           transition={{ duration: 0.2, ease: "easeInOut" }}
         >
           {isDarkMode ? (

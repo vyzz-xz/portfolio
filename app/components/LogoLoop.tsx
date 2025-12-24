@@ -35,6 +35,7 @@ export interface LogoLoopProps {
   ariaLabel?: string;
   className?: string;
   style?: React.CSSProperties;
+  isDarkMode?: boolean;
 }
 
 const ANIMATION_CONFIG = {
@@ -211,7 +212,8 @@ export const LogoLoop = React.memo<LogoLoopProps>(
     renderItem,
     ariaLabel = 'Partner logos',
     className,
-    style
+    style,
+    isDarkMode = false
   }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
@@ -331,8 +333,12 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             className={cx(
               'inline-flex items-center',
               'motion-reduce:transition-none',
+              'transition-all duration-500 ease-in-out',
+              isDarkMode 
+                ? 'text-neutral-500 group-hover/item:text-white' 
+                : 'text-neutral-400 group-hover/item:text-black',
               scaleOnHover &&
-                'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-125 group-hover/item:text-black'
+                'transform group-hover/item:scale-125'
             )}
             aria-hidden={!!(item as any).href && !(item as any).ariaLabel}
           >
@@ -346,7 +352,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
               '[image-rendering:-webkit-optimize-contrast]',
               'motion-reduce:transition-none',
               scaleOnHover &&
-                'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-125 group-hover/item:text-black'
+                'transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-125'
             )}
             src={(item as any).src}
             srcSet={(item as any).srcSet}
@@ -370,7 +376,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             className={cx(
               'inline-flex items-center no-underline rounded',
               'transition-opacity duration-200 ease-linear',
-              'hover:opacity-80',
+              'hover:opacity-100',
               'focus-visible:outline focus-visible:outline-current focus-visible:outline-offset-2'
             )}
             href={(item as any).href}
@@ -398,7 +404,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           </li>
         );
       },
-      [isVertical, scaleOnHover, renderItem]
+      [isVertical, scaleOnHover, renderItem, isDarkMode]
     );
 
     const logoLists = useMemo(

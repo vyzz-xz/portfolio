@@ -19,6 +19,7 @@ export type DockProps = {
   dockHeight?: number;
   magnification?: number;
   spring?: any;
+  isDarkMode?: boolean;
 };
 
 function DockItem({
@@ -29,7 +30,8 @@ function DockItem({
   spring,
   distance,
   magnification,
-  baseItemSize
+  baseItemSize,
+  isDarkMode
 }: any) {
   const ref = useRef<HTMLDivElement>(null);
   const isHovered = useMotionValue(0);
@@ -55,7 +57,11 @@ function DockItem({
       onBlur={() => isHovered.set(0)}
       onClick={onClick}
 
-      className={`relative inline-flex items-center justify-center rounded-full transition-colors duration-300 cursor-pointer text-black hover:text-black hover:bg-neutral-200/50 ${className}`}
+      className={`relative inline-flex items-center justify-center rounded-full transition-colors duration-300 cursor-pointer ${isDarkMode 
+          ? 'text-white hover:text-white hover:bg-white/5'
+          : 'text-black hover:text-black hover:bg-black/5' 
+        } 
+        ${className}`}
       tabIndex={0}
       role="button"
     >
@@ -68,7 +74,7 @@ function DockItem({
   );
 }
 
-function DockLabel({ children, className = '', isHovered }: any) {
+function DockLabel({ children, className = '', isHovered, isDarkMode }: any) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -87,7 +93,12 @@ function DockLabel({ children, className = '', isHovered }: any) {
           animate={{ opacity: 1, y: -12, x: "-50%" }}
           exit={{ opacity: 0, y: 5, x: "-50%" }}
           transition={{ duration: 0.2 }}
-          className={`${className} hidden md:block absolute -top-6 left-1/2 w-fit whitespace-pre rounded-md border border-neutral-200 bg-black/90 px-2 py-0.5 text-[10px] font-reguler text-white shadow-sm backdrop-blur-sm z-50 pointer-events-none`}
+          className={`${className} absolute -top-5 left-1/2 w-fit whitespace-pre rounded-md border px-2 py-0.5 text-[10px] font-medium shadow-sm backdrop-blur-sm z-50 pointer-events-none
+            ${isDarkMode 
+              ? 'bg-white border-black text-white' 
+              : 'bg-black border-black text-white' 
+            }
+          `}
         >
           {children}
         </motion.div>
@@ -100,7 +111,7 @@ function DockIcon({ children, className = '' }: any) {
   return <div className={`flex items-center justify-center w-full h-full ${className}`}>{children}</div>;
 }
 
-function DockDivider() {
+function DockDivider({ isDarkMode }: { isDarkMode?: boolean }) {
   return <div className="h-8 w-[1px] bg-neutral-300/50 mx-2 self-center" />;
 }
 
@@ -108,13 +119,14 @@ export default function Dock({
   items,
   className = '',
 
-  spring = { mass: 0.1, stiffness: 100, damping: 12 }, 
+  spring = { mass: 0.1, stiffness: 150, damping: 18 }, 
   
   magnification = 60, 
   distance = 150,     
-  panelHeight = 64,   
+  panelHeight = 58,   
   dockHeight = 150,
-  baseItemSize = 45   
+  baseItemSize = 45,
+  isDarkMode = false   
 }: DockProps) {
   const mouseX = useMotionValue(Infinity);
   const isHovered = useMotionValue(0);
@@ -134,7 +146,11 @@ export default function Dock({
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
-        className={`${className} fixed bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex items-center w-fit gap-0.1 rounded-full bg-white/90 border border-black/10 px-3 pb-2 pt-2 backdrop-blur-2xl shadow z-20 transition-all duration-300`}
+        className={`${className} fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center w-fit gap-0.1 rounded-full px-2 py-1 backdrop-blur-2xl shadow-l z-50 transition-colors duration-500
+          ${isDarkMode 
+            ? 'bg-neutral-900/80 border border-white/20'
+            : 'bg-white border border-black/20'     
+          }`}
         style={{ height: panelHeight }}
         role="toolbar"
       >
@@ -152,6 +168,7 @@ export default function Dock({
               distance={distance}
               magnification={magnification}
               baseItemSize={baseItemSize}
+              isDarkMode={isDarkMode}
             >
               <DockIcon>{item.icon}</DockIcon>
               <DockLabel>{item.label}</DockLabel>

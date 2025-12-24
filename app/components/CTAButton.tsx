@@ -5,9 +5,10 @@ import { motion } from 'framer-motion';
 interface CTAButtonProps {
   text: string;
   onClick?: () => void;
+  isDarkMode?: boolean;
 }
 
-export default function CTAButton({ text, onClick }: CTAButtonProps) {
+export default function CTAButton({ text, onClick, isDarkMode = false }: CTAButtonProps) {
   return (
     <motion.button
       onClick={onClick}
@@ -15,7 +16,14 @@ export default function CTAButton({ text, onClick }: CTAButtonProps) {
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       
-      className="relative overflow-hidden rounded-full bg-white px-6 py-4 text-black border border-black/50 shadow-lg group"
+      className={`
+        relative overflow-hidden rounded-full px-5 py-4 border shadow-lg group cursor-pointer bg-transparent backdrop-blur-sm
+        transition-colors duration-300 ease-out
+        ${isDarkMode 
+          ? 'border-white/50 text-white'
+          : 'border-black/50 text-black'
+        }
+      `}
     >
       <div className="relative overflow-hidden">
         

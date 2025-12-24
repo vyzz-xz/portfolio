@@ -3,12 +3,15 @@
 import { motion } from 'framer-motion';
 import { LuArrowDown } from 'react-icons/lu';
 
-export default function ScrollButton() {
+interface ScrollButtonProps {
+  isDarkMode?: boolean;
+}
+
+export default function ScrollButton({ isDarkMode = false }: ScrollButtonProps) {
   
   const handleScroll = () => {
     const nextSection = document.getElementById('about');
     if (nextSection) {
-      // Scroll halus ke section tersebut
       nextSection.scrollIntoView({ behavior: 'smooth' });
     } else {
     window.scrollTo({
@@ -26,29 +29,48 @@ export default function ScrollButton() {
       whileHover="hover"
       layout
 
-      className="group flex items-center p-[1px] rounded-full cursor-pointer shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] border border-black/50"
-      style={{ minWidth: '50px', height: '50px' }}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-    >
-      <motion.div
-        layout
-        className="w-12 h-12 rounded-full flex items-center justify-center text-black"
-      >
-        <LuArrowDown size={20} />
-      </motion.div>
+className={`
+  flex items-center p-3.5 rounded-full cursor-pointer border backdrop-blur-[2px]
+  transition-colors duration-500 ease-out
+  ${isDarkMode 
+  ? 'border-white/50 text-white hover:border-white/50' 
+  : 'border-black/50 text-black hover:border-black/50'
+  }
+`}
+  transition={{ 
+  type: "spring", 
+  stiffness: 300, 
+  damping: 30 
+  }}
+>
+{/* ICON PANAH */}
+<motion.div 
+  layout 
+  className="flex items-center justify-center"
+>
+  <LuArrowDown size={20} />
+  </motion.div>
 
-      <motion.div
-        layout
-        className="overflow-hidden"
-        variants={{
-          initial: { width: 0, opacity: 0, marginLeft: 0 },
-          hover: { width: "auto", opacity: 1, marginLeft: -4, paddingRight: 25 }
-        }}
-      >
-        <span className="whitespace-nowrap font-medium text-base tracking-widest text-black font-redhat">
-          Scroll
-        </span>
-      </motion.div>
-    </motion.button>
+  <motion.div
+    className="overflow-hidden flex items-center"
+    variants={{
+    initial: { 
+    width: 0, 
+    opacity: 0, 
+    paddingLeft: 0 
+  },
+    hover: { 
+    width: "auto", 
+    opacity: 1, 
+    paddingLeft: 10
+  }
+}}
+    transition={{ duration: 0.3, ease: "easeOut" }}
+  >
+    <span className="whitespace-nowrap font-medium text-xs tracking-[0.2em] uppercase font-redhat">
+    Scroll
+  </span>
+  </motion.div>
+  </motion.button>
   );
 }

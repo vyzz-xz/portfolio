@@ -9,13 +9,11 @@ import Clock from "./components/Clock";
 import ScrollButton from "./components/ScrollButton";
 import ScrollReveal from "./components/ScrollReveal";
 import LogoLoop from './components/LogoLoop';
+import ThemeToggle from "./components/ThemeToggle";
 import CTAButton from "./components/CTAButton";
 
 import { 
-  VscHome, 
-  VscAccount, 
-  VscFolderLibrary, 
-  VscGithubAlt, 
+  VscHome,VscAccount,VscFolderLibrary,VscGithubAlt, 
 } from "react-icons/vsc";
 
 import { FaLinkedinIn } from "react-icons/fa6";
@@ -27,6 +25,8 @@ import {
 
 export default function Home() {
 
+const [isDarkMode, setIsDarkMode] = useState(true);
+
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const handleResize = () => {
@@ -34,12 +34,50 @@ export default function Home() {
     };
    
     handleResize(); 
-    
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  const iconSize = isMobile ? 30 : 50;
 
+ {/* TOOGLE THEME */}
+const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!document.startViewTransition) {
+      setIsDarkMode(!isDarkMode);
+      return;
+    }
+
+    const target = e.currentTarget;
+    const rect = target.getBoundingClientRect();
+    
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+      setIsDarkMode(!isDarkMode);
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration: 800,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)", 
+        }
+      );
+    });
+  };
+
+  const iconSize = isMobile ? 30 : 50;
   const techLogos = [
     { node: <SiReact size={70} />, title: "React", href: "https://react.dev" },
     { node: <SiNextdotjs size={70} />, title: "Next.js", href: "https://nextjs.org" },
@@ -52,7 +90,6 @@ export default function Home() {
   ];
 
   const dockIconSize = isMobile ? 18 : 22;
-
   const items = [
     {icon: <VscHome size={17} />, 
       label: 'Home', 
@@ -72,17 +109,28 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-[100dvh] w-full relative bg-white text-black selection:bg-black selection:text-white overflow-x-hidden">
-
-    <div className="fixed top-6 left-6 md:top-6 md:left-6 z-50"><Clock /></div>
-    
-    {/* HERO SECTION */}
-    <section id="hero" className="relative w-full h-[100dvh] flex flex-col justify-center items-center z-10 overflow-hidden">
+    <main className={`min-h-[100dvh] w-full relative overflow-x-hidden transition-colors duration-0
+      ${isDarkMode ? 'bg-black text-white selection:bg-white selection:text-black' : 'bg-white text-black selection:bg-black selection:text-white'}`}>
 
     {/* GRADIENT-BG */}
     <div className="absolute inset-0 z-0 pointer-events-none">
-      {(<div className="absolute inset-0 bg-white bg-[radial-gradient(100%_100%_at_50%_0%,rgba(99,102,241,0)_0,rgba(99,102,241,0.25)_50%,rgba(99,102,241,0)_100%)]" />)}
+      {isDarkMode ?(
+        <div className="absolute inset-0 bg-black bg-[radial-gradient(100%_100%_at_50%_0%,rgba(99,102,241,0)_0,rgba(99,102,241,0.25)_0%,rgba(99,102,241,0)_50%)]" />
+      ):(
+        <div className="absolute inset-0 bg-white bg-[radial-gradient(100%_100%_at_50%_0%,rgba(99,102,241,0)_0,rgba(99,102,241,0.25)_0%,rgba(99,102,241,0)_50%)]" />
+      )}
     </div>
+
+    <div className="fixed top-6 left-6 md:top-6 md:left-6 z-50 transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-black'}`"><Clock />
+    </div>
+    
+    {/* TOGGLE TEMA (Posisi Kanan Atas) */}
+      <div className="fixed top-4 right-4 md:top-6 md:right-6 z-50">
+        <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      </div>
+    
+    {/* HERO SECTION */}
+    <section id="hero" className="relative w-full h-[100dvh] flex flex-col justify-center items-center z-10 overflow-hidden">
 
     <div className="w-full flex flex-col justify-center items-center z-0 px-4">
 
@@ -96,19 +144,19 @@ export default function Home() {
         width={true}
         weight={true}
         italic={true}
-        textColor={"#000000"}
+        textColor={isDarkMode ? "#FFFFFF" : "#000000"}
         minFontSize={10}
         />
       </div>
     </div>
   </div>
       
-    <div className="w-full relative z-10 transform scale-110 md:scale-100 -mt-12 md:-mt-16">
+    <div className="w-full relative z-10 transform scale-110 md:scale-100 -mt-12 md:-mt-5">
       <ScrollVelocity
         texts={['UI/UX DESIGNER - TECH ENTHUSIAST - FRONTEND DEVELOPER -']} 
         velocity={150}
         numCopies={100} 
-        className="font-redhat text-[5rem] md:text-[8rem] font-black tracking-[-0.08em] leading-[0.8] text-black whitespace-nowrap"
+        className="font-redhat text-[5rem] md:text-[8rem] font-black tracking-[-0.08em] leading-[0.8] whitespace-nowrap transition-colors duration-300 ${isDarkMode ? 'text-black' : 'text-white'}"
       />
     </div>
     <div className="w-full -mt-0 md:-mt-0">
@@ -116,12 +164,12 @@ export default function Home() {
         texts={['TECH ENTHUSIAST - FRONTEND DEVELOPER - UI/UX DESIGNER -']} 
         velocity={-150}
         numCopies={100} 
-        className="font-redhat text-[5rem] md:text-[8rem] font-black tracking-[-0.08em] leading-[0.8] text-black whitespace-nowrap"
+        className="font-redhat text-[5rem] md:text-[8rem] font-black tracking-[-0.08em] leading-[0.8] whitespace-nowrap ${isDarkMode ? 'text-black' : 'text-white'}"
       />
     </div>
 
       <div className="absolute bottom-[20%] md:bottom-[20%] left-0 right-0 flex justify-center z-20 pointer-events-auto">
-        <ScrollButton />
+      <ScrollButton isDarkMode={isDarkMode} />
       </div>
   </section>
   
@@ -156,8 +204,9 @@ export default function Home() {
             hoverSpeed={50} 
             scaleOnHover={true} 
             fadeOut={true} 
-            fadeOutColor="#ffffff" 
+            fadeOutColor={isDarkMode ? "#000000" : "#ffffff"}
             ariaLabel="Technology partners"
+            isDarkMode={isDarkMode}
           />
         </div>
 
@@ -165,6 +214,7 @@ export default function Home() {
           <CTAButton 
             text="More About Me" 
             onClick={() => window.location.href = 'mailto:email@example.com'} 
+            isDarkMode={isDarkMode}
           />
         </div>
 
@@ -173,8 +223,9 @@ export default function Home() {
 
       <Dock items={items}
         baseItemSize={isMobile ? 35 : 45}
-        panelHeight={isMobile ? 50 : 64} 
-        magnification={isMobile ? 50 : 60}
+        panelHeight={isMobile ? 50 : 60} 
+        magnification={isMobile ? 45 : 55}
+        isDarkMode={isDarkMode}
       />
 
     </main>
