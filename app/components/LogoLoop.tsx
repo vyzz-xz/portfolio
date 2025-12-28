@@ -338,7 +338,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
                 ? 'text-neutral-500 group-hover/item:text-white' 
                 : 'text-neutral-400 group-hover/item:text-black',
               scaleOnHover &&
-                'transform group-hover/item:scale-125'
+                'transform hover:scale-110 md:hover:scale-125'
             )}
             aria-hidden={!!(item as any).href && !(item as any).ariaLabel}
           >

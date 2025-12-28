@@ -11,6 +11,7 @@ import ScrollReveal from "./components/ScrollReveal";
 import LogoLoop from './components/LogoLoop';
 import ThemeToggle from "./components/ThemeToggle";
 import CTAButton from "./components/CTAButton";
+import ProjectList from "./components/ProjectList";
 
 import { 
   VscHome,VscAccount,VscFolderLibrary,VscGithubAlt, 
@@ -87,6 +88,13 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
     { node: <SiFigma size={70} />, title: "Figma", href: "https://figma.com" },
     { node: <SiNodedotjs size={70} />, title: "Node.js", href: "https://nodejs.org" },
     { node: <SiGithub size={70} />, title: "GitHub", href: "https://github.com" },
+  ];
+
+  const projects = [
+    { title: "BookShelf", category: "Library Management Web", image: "/projects/Book.jpg", link: "#" },
+    { title: "Vico Apps", category: "Language Learning Apps", image: "/projects/Vico.jpg", link: "#" },
+    { title: "SumbangBang Apps", category: "Food Donation Application", image: "/projects/SumbangBang.jpg", link: "#" },
+    { title: "KodeKepo AI", category: "Fullstack", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2670&auto=format&fit=crop", link: "#" },
   ];
 
   const dockIconSize = isMobile ? 18 : 22;
@@ -175,7 +183,7 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
   
   {/*SECTION ABOUT*/}
       <section id="about" className="relative w-full min-h-[100vh] flex flex-col items-center justify-center py-5 px-6 md:px-20 z-10">
-        <div className="max-w-5xl w-full text-center">
+        <div className="max-w-5xl w-full text-center font-redhat">
           
           <ScrollReveal
           baseOpacity={0}
@@ -219,6 +227,29 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
         </div>
 
         <div className="h-40"></div>
+      </section>
+
+      {/* SECTION PROJECTS */}
+      <section id="projects" className="relative w-full py-20 px-4 md:px-20 z-10">   
+        <div className="w-full flex justify-center mb-10 select-none pointer-events-none">
+            <h2 className={`
+                text-[16.7vw] leading-none font-black font-redhat uppercase tracking-tighter text-center
+                transition-colors duration-500
+                ${isDarkMode 
+                  ? 'text-neutral-900' 
+                  : 'text-neutral-100'
+                }
+            `}>
+              MY WORKS
+            </h2>
+        </div>
+
+        <div className="w-full relative z-30">
+            <ProjectList 
+                projects={projects} 
+                isDarkMode={isDarkMode} 
+            />
+        </div>
       </section>
 
       <Dock items={items}
