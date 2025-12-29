@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import ScrollVelocity from "./components/ScrollVelocity"
 import Dock from './components/Dock';
@@ -120,30 +119,30 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
     <main className={`min-h-[100dvh] w-full relative overflow-x-hidden transition-colors duration-0
       ${isDarkMode ? 'bg-black text-white selection:bg-white selection:text-black' : 'bg-white text-black selection:bg-black selection:text-white'}`}>
 
-    {/* GRADIENT-BG */}
-    <div className="absolute inset-0 z-0 pointer-events-none">
-      {isDarkMode ?(
-        <div className="absolute inset-0 bg-black bg-[radial-gradient(100%_100%_at_50%_0%,rgba(99,102,241,0)_0,rgba(99,102,241,0.25)_0%,rgba(99,102,241,0)_50%)]" />
-      ):(
-        <div className="absolute inset-0 bg-white bg-[radial-gradient(100%_100%_at_50%_0%,rgba(99,102,241,0)_0,rgba(99,102,241,0.25)_0%,rgba(99,102,241,0)_50%)]" />
-      )}
-    </div>
-
     <div className="fixed top-6 left-6 md:top-6 md:left-6 z-50 transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-black'}`"><Clock />
     </div>
     
-    {/* TOGGLE TEMA (Posisi Kanan Atas) */}
+    {/* TOGGLE TEMA */}
       <div className="fixed top-4 right-4 md:top-6 md:right-6 z-50">
         <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       </div>
-    
-    {/* HERO SECTION */}
-    <section id="hero" className="relative w-full h-[100dvh] flex flex-col justify-center items-center z-10 overflow-hidden">
+
+      {/* HERO SECTION */}
+      <section id="hero" className="relative w-full h-[100dvh] flex flex-col justify-center items-center z-10 overflow-hidden">
+
+    {/* GRADIENT-BG */}
+    <div className="absolute inset-0 z-0 pointer-events-none">
+      {isDarkMode ?(
+        <div className="absolute inset-0 bg-black bg-[radial-gradient(100%_100%_at_50%_0%,rgba(59,130,246,0)_0,rgba(59,130,246,0.25)_0%,rgba(59,130,246,0)_100%)]" />
+      ):(
+        <div className="absolute inset-0 bg-white bg-[radial-gradient(100%_100%_at_50%_0%,rgba(59,130,246,0)_0,rgba(59,130,246,0.25)_0%,rgba(59,130,246,0)_100%)]" />
+      )}
+    </div>
 
     <div className="w-full flex flex-col justify-center items-center z-0 px-4">
 
-    <div className="absolute top-[15%] md:top-[23%] left-0 right-0 flex justify-center z-20 px-4">
-    <div className="w-full max-w-[300px] h-12 relative flex items-center justify-center cursor-default">
+    <div className="absolute top-[25%] md:top-[25%] left-0 right-0 flex justify-center z-20 px-4">
+    <div className="w-full max-w-[160px] md:max-w-[300px] h-8 md:h-12 relative flex items-center justify-center cursor-default">
       <TextPressure
         text="MUHAMAD HAFIZ"
         flex={true}
@@ -153,7 +152,7 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
         weight={true}
         italic={true}
         textColor={isDarkMode ? "#FFFFFF" : "#000000"}
-        minFontSize={10}
+        minFontSize={isMobile ? 10 : 14}
         />
       </div>
     </div>
@@ -221,7 +220,7 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
         <div className="mt-12 md:mt-12 flex justify-center">
           <CTAButton 
             text="More About Me" 
-            onClick={() => window.location.href = 'mailto:email@example.com'} 
+            onClick={() => window.location.href = 'mailto:email@example.com'} //belum di ubah
             isDarkMode={isDarkMode}
           />
         </div>
@@ -249,6 +248,13 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
                 projects={projects} 
                 isDarkMode={isDarkMode} 
             />
+        </div>
+        <div className="mt-12 md:mt-15 flex justify-center">
+          <CTAButton 
+            text="See More" 
+            onClick={() => window.location.href = 'mailto:email@example.com'} //belum di ubah
+            isDarkMode={isDarkMode}
+          />
         </div>
       </section>
 

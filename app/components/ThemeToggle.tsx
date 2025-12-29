@@ -13,12 +13,12 @@ export default function ThemeToggle({ isDarkMode, toggleTheme }: ThemeToggleProp
     <button
       onClick={toggleTheme}
       className={`
-        relative flex items-center justify-center w-12 h-12 rounded-full 
+        relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full 
         backdrop-blur-md border shadow-lg transition-all duration-300 ease-in-out cursor-pointer z-50
      
         ${isDarkMode 
           ? 'bg-white/10 border-white/20 hover:bg-white/20 text-white' 
-          : 'bg-black/5 border-black/10 hover:bg-black/10 text-black'
+          : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'
         }
       `}
       aria-label="Toggle Theme"
@@ -32,9 +32,9 @@ export default function ThemeToggle({ isDarkMode, toggleTheme }: ThemeToggleProp
           transition={{ duration: 0.2, ease: "easeInOut" }}
         >
           {isDarkMode ? (
-            <LuMoon size={22} />
+            <LuMoon className="w-5 h-5 md:w-6 md:h-6" />
           ) : (
-            <LuSun size={22} />
+            <LuSun className="w-5 h-5 md:w-6 md:h-6" />
           )}
         </motion.div>
       </AnimatePresence>

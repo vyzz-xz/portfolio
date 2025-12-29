@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Red_Hat_Text } from "next/font/google";
 import "./globals.css";
+import ClientLayout from "./components/ClientLayout";
 
 const redHatText = Red_Hat_Text({
   subsets: ["latin"],
@@ -24,7 +25,10 @@ export default function RootLayout({
       <body
         className={`${redHatText.variable} antialiased`}
       >
-        {children}
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+        
       </body>
     </html>
   );
