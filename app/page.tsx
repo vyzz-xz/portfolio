@@ -90,10 +90,10 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
   ];
 
   const projects = [
-    { title: "BookShelf", category: "Library Management Web", image: "/projects/Book.jpg", link: "#" },
+    { title: "BookShelf", category: "Library Management Web", image: "/projects/Book.jpg", link: "https://book-nestv1.vercel.app/" },
     { title: "Vico Apps", category: "Language Learning Apps", image: "/projects/Vico.jpg", link: "#" },
     { title: "SumbangBang Apps", category: "Food Donation Application", image: "/projects/SumbangBang.jpg", link: "#" },
-    { title: "KodeKepo AI", category: "Fullstack", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2670&auto=format&fit=crop", link: "#" },
+    { title: "Photobooth", category: "Free Photobooth Web", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2670&auto=format&fit=crop", link: "#" },
   ];
 
   const dockIconSize = isMobile ? 18 : 22;
