@@ -11,6 +11,8 @@ import LogoLoop from './components/LogoLoop';
 import ThemeToggle from "./components/ThemeToggle";
 import CTAButton from "./components/CTAButton";
 import ProjectList from "./components/ProjectList";
+import Magnet from "./components/Magnet";
+import SplitText from "./components/SplitText";
 
 import { 
   VscHome,VscAccount,VscFolderLibrary,VscGithubAlt, 
@@ -196,12 +198,12 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
           </ScrollReveal>
         </div>
 
-      <div className="h-10"></div>
+      <div className="h-40"></div>
       </section>
 
     {/* SECTION TECH STACK */}
-    <section id="skills" className="relative w-full py-10 z-10 flex flex-col items-center justify-center">
-        <div style={{ width: '100%', height: isMobile ? '120px' : '200px', position: 'relative', overflow: 'hidden'}}>
+    <section id="skills" className="relative w-full py-15 z-10 flex flex-col items-center justify-center">
+        <div style={{ width: '100%', height: isMobile ? '150px' : '200px', position: 'relative', overflow: 'hidden'}}>
           <LogoLoop
             logos={techLogos}
             speed={isMobile ? 80 : 150}
@@ -217,7 +219,7 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
           />
         </div>
 
-        <div className="mt-12 md:mt-12 flex justify-center">
+        <div className="mt-24 md:mt-12 flex justify-center">
           <CTAButton 
             text="More About Me" 
             onClick={() => window.location.href = 'mailto:email@example.com'} //belum di ubah
@@ -232,14 +234,14 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
       <section id="projects" className="relative w-full py-20 px-4 md:px-20 z-10">   
         <div className="w-full flex justify-center mb-10 select-none pointer-events-none">
             <h2 className={`
-                text-[16.7vw] leading-none font-black font-redhat uppercase tracking-tighter text-center
-                transition-colors duration-500
+                font-black font-redhat uppercase tracking-tighter select-none 
+                whitespace-nowrap text-center leading-none text-[17vw] md:text-[16.6vw]
                 ${isDarkMode 
                   ? 'text-neutral-900' 
                   : 'text-neutral-100'
                 }
             `}>
-              MY WORKS
+              <SplitText text="MY WORKS" delay={0.4}/>
             </h2>
         </div>
 
@@ -249,13 +251,82 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
                 isDarkMode={isDarkMode} 
             />
         </div>
-        <div className="mt-12 md:mt-15 flex justify-center">
+        <div className="mt-24 md:mt-20 flex justify-center">
           <CTAButton 
             text="See More" 
             onClick={() => window.location.href = 'mailto:email@example.com'} //belum di ubah
             isDarkMode={isDarkMode}
           />
         </div>
+        <div className="h-10"></div>
+      </section>
+    
+    {/* SECTION QUOTES */}
+      <section id="quotes" className="relative w-full py-24 md:py-40 flex flex-col items-center justify-center z-10 overflow-hidden">
+
+      <div className="absolute top-0 left-0 w-full flex justify-center z-0 select-none pointer-events-none mt-10">
+        <h2 className={`text-[24vw] md:text-[24vw] font-black font-redhat uppercase tracking-tighter mb-12 select-none text-center
+            ${isDarkMode ? 'text-neutral-900' : 'text-neutral-100'} 
+            `}>
+          <SplitText text="Quotes" delay={0.5}/>
+        </h2>
+      </div>
+      <div className="relative z-10 max-w-4xl text-center px-4 mt-24 md:mt-48"></div>
+
+        <div className="max-w-6xl text-center px-6">
+           <div className={`text-2xl md:text-7xl font-bold font-redhat tracking-tighter leading-none ${isDarkMode ? 'text-white' : 'text-black'}`}>
+             <SplitText 
+               text='Don&apos;t let us get caught up in the Vibe Coding because it is very dangerous...'
+               delay={0.2}
+             />
+           </div>
+
+           <div className="mt-8 md:mt-12 flex justify-center">
+             <Magnet padding={20} strength={4}>
+               <span className={`text-sm md:text-xl font-medium tracking-wide cursor-pointer transition-colors duration-500 ${isDarkMode ? 'text-white/80' : 'text-black/50'}`}>
+                <SplitText text="Muhamad Hafiz, Probably" delay={0.5}/>
+               </span>
+             </Magnet>
+           </div>
+        </div>
+      <div className="h-30"></div>
+      </section>
+
+      {/* SECTION CONTACT */}
+      <section id="contact" className="relative w-full py-24 md:py-40 flex flex-col items-center justify-center z-10 overflow-hidden">
+
+      <div className="absolute top-0 left-0 w-full flex justify-center z-0 select-none pointer-events-none mt-10">
+        <h2 className={`text-[21vw] md:text-[21vw] font-black font-redhat uppercase tracking-tighter mb-12 select-none text-center
+            ${isDarkMode ? 'text-neutral-900' : 'text-neutral-100'} 
+            `}>
+          <SplitText text="Contact" delay={0.5}/>
+        </h2>
+      </div>
+      <div className="relative z-10 max-w-4xl text-center px-4 mt-24 md:mt-48"></div>
+
+        <div className="relative z-10 max-w-6xl text-center px-6">
+           <div className={`text-3xl md:text-7xl font-bold font-redhat uppercase tracking-tighter leading-none ${isDarkMode ? 'text-white' : 'text-black'}`}>
+             <SplitText 
+               text='Let&apos;s make something great'
+               delay={0.2}
+             />
+             <div className="text-neutral-200">
+               <SplitText 
+                 text="Contact Me" 
+                 delay={0.3}
+               />
+             </div>
+           </div>
+
+           <div className="mt-5 md:mt-12 flex justify-center">
+             <Magnet padding={5} strength={20}>
+               <span className={`text-sm md:text-xl font-normal tracking-wide leading-normal cursor-pointer transition-colors duration-500 flex flex-col gap-4 items-center max-w-xs md:max-w-2xl ${isDarkMode ? 'text-neutral-400' : 'text-neutral-400'}`}>
+                <SplitText text="I'm always open to new opportunities, collaborations, and connections. Got a project to discuss or just want to say hi? Feel free to reach out!" delay={0.3}/>
+               </span>
+             </Magnet>
+           </div>
+        </div>
+      <div className="h-30"></div>
       </section>
 
       <Dock items={items}

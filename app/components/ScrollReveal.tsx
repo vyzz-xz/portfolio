@@ -15,6 +15,7 @@ interface ScrollRevealProps {
   textClassName?: string;
   rotationEnd?: string;
   wordAnimationEnd?: string;
+  delay?: number;
 }
 
 const ScrollReveal: React.FC<ScrollRevealProps> = ({
