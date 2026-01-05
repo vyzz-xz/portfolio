@@ -13,6 +13,7 @@ import CTAButton from "./components/CTAButton";
 import ProjectList from "./components/ProjectList";
 import Magnet from "./components/Magnet";
 import SplitText from "./components/SplitText";
+import Footer from "./components/Footer";
 
 import { 
   VscHome,VscAccount,VscFolderLibrary,VscGithubAlt, 
@@ -123,6 +124,16 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
 
     <div className="fixed top-6 left-6 md:top-6 md:left-6 z-50 transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-black'}`"><Clock />
     </div>
+
+    <div 
+        className={`
+          relative z-10 
+          w-full
+          mb-[400px]
+          transition-colors duration-700
+          ${isDarkMode ? 'bg-black text-white' : 'bg-white text-black'}
+        `}
+      >
     
     {/* TOGGLE TEMA */}
       <div className="fixed top-4 right-4 md:top-6 md:right-6 z-50">
@@ -283,7 +294,7 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
 
            <div className="mt-8 md:mt-12 flex justify-center">
              <Magnet padding={20} strength={4}>
-               <span className={`text-sm md:text-xl font-medium tracking-wide cursor-pointer transition-colors duration-500 ${isDarkMode ? 'text-white/80' : 'text-black/50'}`}>
+               <span className={`text-sm md:text-xl font-reguler tracking-wide cursor-pointer transition-colors duration-500 ${isDarkMode ? 'text-white/80' : 'text-black/50'}`}>
                 <SplitText text="Muhamad Hafiz, Probably" delay={0.5}/>
                </span>
              </Magnet>
@@ -320,7 +331,7 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
 
            <div className="mt-5 md:mt-12 flex justify-center">
              <Magnet padding={5} strength={20}>
-               <span className={`text-sm md:text-xl font-normal tracking-wide leading-normal cursor-pointer transition-colors duration-500 flex flex-col gap-4 items-center max-w-xs md:max-w-2xl ${isDarkMode ? 'text-neutral-400' : 'text-neutral-400'}`}>
+               <span className={`text-sm md:text-xl font-reguler tracking-wide leading-normal cursor-pointer transition-colors duration-500 flex flex-col gap-4 items-center max-w-xs md:max-w-2xl ${isDarkMode ? 'text-neutral-400' : 'text-neutral-400'}`}>
                 <SplitText text="I'm always open to new opportunities, collaborations, and connections. Got a project to discuss or just want to say hi? Feel free to reach out!" delay={0.3}/>
                </span>
              </Magnet>
@@ -328,6 +339,13 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
         </div>
       <div className="h-30"></div>
       </section>
+    <div className="h-[50px] md:h-[60px]"></div>
+    </div>
+    
+    {/* SECTION FOOTER */}
+    <div className="fixed bottom-0 left-0 w-full h-[400px] z-0">
+        <Footer isDarkMode={isDarkMode} />
+    </div>
 
       <Dock items={items}
         baseItemSize={isMobile ? 35 : 45}

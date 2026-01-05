@@ -62,12 +62,11 @@ export default function ProjectList({ projects, isDarkMode }: ProjectListProps) 
 
   return (
     <div 
-      className="relative w-full max-w-5xl mx-auto py-0 md:py-10"
+      className="relative w-full max-w-6xl mx-auto py-0 md:py-10"
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setActiveProject(null)}
     >
       
-      {/* --- LIST PROJECTS --- */}
       <motion.div 
         className="flex flex-col"
         variants={containerVariants}
@@ -92,7 +91,6 @@ export default function ProjectList({ projects, isDarkMode }: ProjectListProps) 
               }
             `}
           >
-            {/* BACKGROUND IMAGE */}
             <div 
               className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out pointer-events-none"
             >
@@ -104,7 +102,6 @@ export default function ProjectList({ projects, isDarkMode }: ProjectListProps) 
               />
             </div>
 
-            {/* KONTEN (JUDUL & KATEGORI) */}
             <div className="relative z-20 flex flex-col gap-1 md:gap-3 transition-transform duration-300 group-hover:translate-x-10">
               <h3 className={`text-xl md:text-5xl font-bold font-redhat transition-colors duration-300
                  ${isDarkMode 
@@ -114,7 +111,7 @@ export default function ProjectList({ projects, isDarkMode }: ProjectListProps) 
               `}>
                 {project.title}
               </h3>
-              <span className={`text-[10px] md:text-sm tracking[2em] font-reguler transition-colors duration-300
+              <span className={`text-[10px] md:text-lg tracking[2em] font-reguler transition-colors duration-300
                  ${isDarkMode 
                    ? 'text-white group-hover:text-black' 
                    : 'text-black group-hover:text-white'
@@ -124,7 +121,6 @@ export default function ProjectList({ projects, isDarkMode }: ProjectListProps) 
               </span>
             </div>
 
-            {/* ICON PANAH */}
             <div className={`relative z-20 transform transition-all duration-500 md:group-hover:-translate-x-10 md:group-hover:-translate-y-1
                ${isDarkMode 
                   ? 'text-white group-hover:text-black' 
@@ -138,8 +134,6 @@ export default function ProjectList({ projects, isDarkMode }: ProjectListProps) 
         ))}
       </motion.div>
 
-
-      {/* --- FLOATING IMAGE POPUP --- */}
       <motion.div
         style={{ x: xSpring, y: ySpring }}
         initial={{ opacity: 0, scale: 0.5 }}

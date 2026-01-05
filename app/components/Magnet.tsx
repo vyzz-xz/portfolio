@@ -21,7 +21,6 @@ export default function Magnet({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Fisika Pegas (Sama seperti Clock & CTA)
   const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
   const xSpring = useSpring(x, springConfig);
   const ySpring = useSpring(y, springConfig);

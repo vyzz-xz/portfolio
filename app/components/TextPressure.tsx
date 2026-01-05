@@ -44,7 +44,6 @@ export default function TextPressure({
   const [scaleY, setScaleY] = useState(1);
   const [lineHeight, setLineHeight] = useState(1);
 
-  // Init Spans
   useEffect(() => {
     if (titleRef.current) {
       const children = Array.from(titleRef.current.querySelectorAll('span'));
@@ -82,7 +81,7 @@ export default function TextPressure({
     return () => window.removeEventListener('resize', handleResize);
   }, [minFontSize, text]);
 
-  // Animation Loop
+  
   useEffect(() => {
     let animationFrameId: number;
 

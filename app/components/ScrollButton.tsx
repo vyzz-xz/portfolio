@@ -43,7 +43,6 @@ className={`
   damping: 30 
   }}
 >
-{/* ICON PANAH */}
 <motion.div 
   layout 
   className="flex items-center justify-center"
