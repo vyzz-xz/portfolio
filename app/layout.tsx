@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Red_Hat_Text } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./components/ClientLayout";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const redHatText = Red_Hat_Text({
   subsets: ["latin"],
@@ -22,12 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${redHatText.variable} antialiased`}
-      >
+      <body className={`${redHatText.variable} antialiased`}>
+        <ThemeProvider>
+
         <ClientLayout>
           {children}
         </ClientLayout>
+        
+        </ThemeProvider>
         
       </body>
     </html>

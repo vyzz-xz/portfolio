@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; 
 import ScrollVelocity from "./components/ScrollVelocity"
 import Dock from './components/Dock';
 import TextPressure from "./components/TextPressure";
@@ -14,6 +15,7 @@ import ProjectList from "./components/ProjectList";
 import Magnet from "./components/Magnet";
 import SplitText from "./components/SplitText";
 import Footer from "./components/Footer";
+import { useTheme } from "./context/ThemeContext";
 
 import { 
   VscHome,VscAccount,VscFolderLibrary,VscGithubAlt, 
@@ -27,59 +29,19 @@ import {
 } from 'react-icons/si';
 
 export default function Home() {
+const router = useRouter();
 
-const [isDarkMode, setIsDarkMode] = useState(true);
-
-  const [isMobile, setIsMobile] = useState(false);
+const {isDarkMode, toggleTheme} = useTheme();
+const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-   
+  const handleResize = () => { setIsMobile(window.innerWidth < 768);};
     handleResize(); 
     window.addEventListener('resize', handleResize);
+    router.prefetch('/about');
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
- {/* TOOGLE THEME */}
-const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!document.startViewTransition) {
-      setIsDarkMode(!isDarkMode);
-      return;
-    }
-
-    const target = e.currentTarget;
-    const rect = target.getBoundingClientRect();
-    
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-
-    const endRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    );
-
-    const transition = document.startViewTransition(() => {
-      setIsDarkMode(!isDarkMode);
-    });
-
-    transition.ready.then(() => {
-      document.documentElement.animate(
-        {
-          clipPath: [
-            `circle(0px at ${x}px ${y}px)`,
-            `circle(${endRadius}px at ${x}px ${y}px)`,
-          ],
-        },
-        {
-          duration: 800,
-          easing: "ease-in-out",
-          pseudoElement: "::view-transition-new(root)", 
-        }
-      );
-    });
-  };
-
+  
+  
   const iconSize = isMobile ? 30 : 50;
   const techLogos = [
     { node: <SiReact size={70} />, title: "React", href: "https://react.dev" },
@@ -106,7 +68,7 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
       onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' })},
     {icon: <VscAccount size={17} />, 
       label: 'About', 
-      onClick: () => alert('About Me')},
+      onClick: () => router.push('/about') },
     {icon: <VscFolderLibrary size={17} />, 
       label: 'Projects', 
       onClick: () => alert('My Projects')},
@@ -233,7 +195,7 @@ const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
         <div className="mt-24 md:mt-12 flex justify-center">
           <CTAButton 
             text="More About Me" 
-            onClick={() => window.location.href = 'mailto:email@example.com'} //belum di ubah
+            onClick={() => router.push('/about')}
             isDarkMode={isDarkMode}
           />
         </div>
